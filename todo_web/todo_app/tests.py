@@ -286,4 +286,4 @@ class TestUserAuthentication(TestCase):
         }
         form = SignUpForm(data=form_data)
         self.assertFalse(form.is_valid())
-
+        self.assertFalse(form.is_valid())
