@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+          <h1 class="text-center">{{task}}</h1>
+          <br>
+          <br>
+          <div class="card">
+              <div class="card-header ">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <h2 class="col-md-3 text-primary">Details:</h2>
+                    <div class="col-md-3 text-center">
+                       <button type="submit" onclick="window.location.href='{% url 'update_task' task.id %}'" class="btn btn-outline-success text-nowrap ">Update Details </button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                         <button type="submit" onclick="window.location.href='{% url 'delete_task' task.id %}'" class="btn btn-outline-danger text-nowrap ">Delete Task </button>
+                    </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                    <h5 class="card-title">{{ task.description }}</h5><br>
+                    <p class="card-text"><strong>Date Created:</strong> {{ task.created_at }}</p><br>
+                    <p class="card-text"><strong>Due Date: </strong>{{ task.expire_at }}</p><br>
+                    <p><strong>Status:</strong> {{ task.status }}</p>
+
+                    <form method="POST" action="{% url 'mark_task' task.id %}">
+                            {% csrf_token %}
+                            {% if task.status == 'Completed' %}
+                                <input type="hidden" name="new_status" value="Not Completed">
+                                <button type="submit" class="btn btn-outline-primary my-2">Mark as Not Completed</button>
+                            {% else %}
+                                <input type="hidden" name="new_status" value="Completed">
+                                <button type="submit" class="btn btn-outline-primary">Mark as Completed</button>
+                            {% endif %}
+                    </form>
+              </div>
+          </div>
+          <button type="submit" onclick="window.location.href='{% url 'dashboard' %}'" class="btn btn-secondary text-nowrap my-5">Back</button>
+    </div>
+
+{% endblock %}

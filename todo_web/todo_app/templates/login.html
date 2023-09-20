@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <br>
+        <h1 class="text-center">WhatToDo</h1>
+         <br>
+        <h3 class="text-primary text-center">A Tool to remind yourself what you have to do.</h3>
+        <br>
+        <br>
+        <p class="text-center">Login to view your scheduled tasks or schedule a new one!</p>
+
+        <br>
+        <br>
+        <h1>Login</h1>
+        <br>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+{% endblock %}
